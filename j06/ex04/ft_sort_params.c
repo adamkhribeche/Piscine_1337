@@ -6,13 +6,13 @@
 /*   By: nkhribec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 13:36:13 by nkhribec          #+#    #+#             */
-/*   Updated: 2019/02/25 12:52:14 by nkhribec         ###   ########.fr       */
+/*   Updated: 2019/04/18 04:39:37 by nkhribec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putchar(char c);
+void		ft_putchar(char c);
 
-int		ft_strcmp(char *s1, char *s2)
+int			ft_strcmp(char *s1, char *s2)
 {
 	unsigned int	i;
 
@@ -28,7 +28,7 @@ int		ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-void	display(int argc, char *argv[])
+void		display(int argc, char *argv[])
 {
 	int	i;
 	int	j;
@@ -46,7 +46,7 @@ void	display(int argc, char *argv[])
 	}
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int		i;
 	int		j;
