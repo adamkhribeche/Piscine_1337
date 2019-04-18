@@ -1,97 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   adam.c                                             :+:      :+:    :+:   */
+/*   atoibase.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkhribec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/23 13:52:57 by nkhribec          #+#    #+#             */
-/*   Updated: 2019/02/23 14:10:58 by nkhribec         ###   ########.fr       */
+/*   Created: 2019/03/07 23:05:03 by nkhribec          #+#    #+#             */
+/*   Updated: 2019/04/18 04:19:21 by nkhribec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	get_base_length(char *base)
+int ft_in_base(char c, int base)
 {
-	int	base_length;
-	int	j;
+	if (base < 10)
+		return (c <= '9' && c >= '0');
+	else
+		return ((c <= '9' && c >= '0') || (c >= 'a' && c <= 'z') 
+				|| (c >= 'A' && c <= 'Z'));
+}
 
-	base_length = 0;
-	while (base[base_length])
+
+int ft_atoi_base(char *str, int base)
+{
+	int result = 0;
+	int signe = 1;
+
+	while (*str <= 32 && *str)
+		str++;
+	if (*str == '-')
 	{
-		if (base[base_length] == '-' || base[base_length] == '+')
-			return (0);
-		j = base_length + 1;
-		while (base[j])
+		signe = -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	while (*str && base >= 2 && base <= 16 && ft_in_base(*str, base))
+	{
+		if (*str <= '9' && *str >= '0')
 		{
-			if (base[base_length] == base[j])
-				return (0);
-			++j;
+			result = result * base + (*str - '0');
 		}
-		++base_length;
+		else if ((*str <= '9' && *str >= '0') || (*str >= 'a' && *str <= 'z'))
+		{
+			result = result * base + (*str - 'a' + 10);
+		}			
+		else if ((*str <= '9' && *str >= '0') || (*str >= 'A' && *str <= 'Z'))
+		{
+			result = result * base + (*str - 'A' + 10);
+		}			
+		str++;
 	}
-	if (base_length < 2)
-		return (0);
-	return (base_length);
-}
-
-int	check_errors(char *str, char *base)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (str[i] != '\0' && str[i] <= 32)
-		i++;
-	while (str[i])
-	{
-		j = 0;
-		while (base[j] && (str[i] != base[j] ||
-					(str[i] == '-' || str[i] == '+')))
-			j++;
-		if (str[i] != base[j] && str[i] != '-' && str[i] != '+')
-			return (0);
-		i++;
-	}
-	if (i == 0)
-		return (0);
-	return (1);
-}
-
-int	get_nb(char c, char *base)
-{
-	int	i;
-
-	i = 0;
-	while (base[i] && base[i] != c)
-		i++;
-	return (i);
-}
-
-int	ft_atoi_base(char *str, char *base)
-{
-	int	head;
-	int	i;
-	int	res;
-	int	negative;
-	int	base_length;
-
-	base_length = get_base_length(base);
-	if (!(base_length) || !check_errors(str, base))
-		return (0);
-	i = 0;
-	while (str[i] != '\0' && str[i] <= 32)
-		i++;
-	head = i;
-	i = i - 1;
-	res = 0;
-	negative = 1;
-	while ((str[++i] && (str[i] == '-' || str[i] == '+') && i == head) ||
-					(str[i] != '-' && str[i] != '+'))
-	{
-		if (str[i] == '-')
-			negative = -1;
-		else if (str[i] != '+')
-			res = (res * base_length) + (get_nb(str[i], base));
-	}
-	return (res * negative);
+	return (result * signe);
 }
