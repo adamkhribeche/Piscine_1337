@@ -6,11 +6,11 @@
 /*   By: nkhribec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 23:05:03 by nkhribec          #+#    #+#             */
-/*   Updated: 2019/04/18 04:19:21 by nkhribec         ###   ########.fr       */
+/*   Updated: 2019/04/18 04:36:30 by nkhribec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_in_base(char c, int base)
+int 	ft_in_base(char c, int base)
 {
 	if (base < 10)
 		return (c <= '9' && c >= '0');
@@ -20,7 +20,7 @@ int ft_in_base(char c, int base)
 }
 
 
-int ft_atoi_base(char *str, int base)
+int 	ft_atoi_base(char *str, int base)
 {
 	int result = 0;
 	int signe = 1;
